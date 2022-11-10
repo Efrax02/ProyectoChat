@@ -14,14 +14,15 @@ namespace AuricularCli
     {
         static void Main(string[] args)
         {
-            NamedPipeClientStream npcs = new NamedPipeClientStream(".","MicrofonoServidor", PipeDirection.In);
-            npcs.Connect();
-            StreamReader sr = new StreamReader(npcs);
-            
-            String mensaje="Hola";
+            //NamedPipeClientStream npcs = new NamedPipeClientStream(".","MicrofonoServidor", PipeDirection.In);
+            //npcs.Connect();
+            //StreamReader sr = new StreamReader(npcs);
+
+            String mensaje;
+            mensaje=Console.ReadLine();
             //mensaje=sr.ReadLine();
-            
             NamedPipeServerStream npss = new NamedPipeServerStream("AuricularCliente", PipeDirection.Out);
+            npss.WaitForConnection();
             StreamWriter sw = new StreamWriter(npss);
             sw.AutoFlush = true;
             IntPtr h = Process.GetProcessesByName("FormularioCliente")[0].MainWindowHandle;
@@ -32,14 +33,15 @@ namespace AuricularCli
             {
                 Funciones.PostMessage(h, WH_MENSAJE, IntPtr.Zero, IntPtr.Zero);
                 sw.WriteLine(mensaje);
-                mensaje = sr.ReadLine();
+                //mensaje = sr.ReadLine();
+                mensaje = Console.ReadLine();
             }
-            sr.Close();
-            sw.Close();
-            npcs.WaitForPipeDrain();
-            npss.WaitForPipeDrain();
-            npcs.Close();
-            npss.Close();
+            //sr.Close();
+            //sw.Close();
+            //npcs.WaitForPipeDrain();
+            //npss.WaitForPipeDrain();
+            //npcs.Close();
+            //npss.Close();
         }
     }
 }

@@ -19,15 +19,6 @@ namespace FormularioCliente
         int WM_MENSAJEREC,WM_MENSAJEENV;
         NamedPipeClientStream npcs;
         StreamReader sr;
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Process p = new Process();
-            p.StartInfo.FileName = "..\\..\\..\\AuricularCli\\Bin\\Debug\\AuricularCli.exe";
-            p.Start();
-            //p = new Process();
-            //p.StartInfo.FileName = "..\\..\\..\\MicrofonoCli\\bin\\debug\\MicrofonoCli.exe";
-            //p.Start();
-        }
 
         public Form1()
         {
@@ -37,13 +28,30 @@ namespace FormularioCliente
             npcs = new NamedPipeClientStream(".", "AuricularCliente", PipeDirection.InOut);
         }
 
+        private void btnConectar_Click(object sender, EventArgs e)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = "..\\..\\..\\AuricularCli\\Bin\\Debug\\AuricularCli.exe";
+            p.Start();           
+            npcs.Connect();
+            sr = new StreamReader(npcs);
+            //p = new Process();
+            //p.StartInfo.FileName = "..\\..\\..\\MicrofonoCli\\bin\\debug\\MicrofonoCli.exe";
+            //p.Start();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            txtRecibido.Enabled = false;
+        }
+
         protected override void DefWndProc(ref Message m)
         {
             
             if (m.Msg == WM_MENSAJEREC)
             {
                 txtRecibido.Clear();
-                String mensaje = sr.ReadLine();
+                string mensaje = sr.ReadLine();
                 txtRecibido.Text = mensaje;
             }
             else
