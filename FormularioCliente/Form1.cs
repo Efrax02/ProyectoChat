@@ -44,6 +44,11 @@ namespace FormularioCliente
             txtRecibido.Enabled = false;
         }
 
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+
+        }
+
         protected override void DefWndProc(ref Message m)
         {
             

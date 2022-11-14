@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuricularCli", "AuricularCl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrofonoCli", "MicrofonoCli\MicrofonoCli.csproj", "{0117FA4B-7878-4495-918F-4632BD40D933}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cliente", "Cliente", "{58819EBD-963B-4CBB-AD36-B6248AC4686A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8050806D-9514-4825-BF03-4E6B583A8822} = {58819EBD-963B-4CBB-AD36-B6248AC4686A}
+		{D57AFC4E-34B1-454F-8DCB-97F66DECB5E8} = {58819EBD-963B-4CBB-AD36-B6248AC4686A}
+		{105F3C38-C995-4D4F-9544-23C531009322} = {58819EBD-963B-4CBB-AD36-B6248AC4686A}
+		{0117FA4B-7878-4495-918F-4632BD40D933} = {58819EBD-963B-4CBB-AD36-B6248AC4686A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {404C430F-28EC-4706-A440-61AB418628E4}
