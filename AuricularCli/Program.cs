@@ -16,7 +16,7 @@ namespace AuricularCli
         {
 
             int WH_MENSAJE;
-            WH_MENSAJE = Funciones.RegisterWindowMessage("WH_MENSAJE");
+            WH_MENSAJE = Funciones.RegisterWindowMessage("WM_MENSAJEREC");
             IntPtr h = Process.GetProcessesByName("FormularioCliente")[0].MainWindowHandle;
             NamedPipeServerStream npss = new NamedPipeServerStream("AuricularCliente", PipeDirection.InOut);
             npss.WaitForConnection();
@@ -34,6 +34,7 @@ namespace AuricularCli
                 sw.WriteLine(mensaje);
                 //mensaje = sr.ReadLine();
                 mensaje = Console.ReadLine();
+                Console.Clear();
             }
             sw.Close();
             npss.WaitForPipeDrain();
