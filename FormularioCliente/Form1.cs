@@ -25,19 +25,18 @@ namespace FormularioCliente
             InitializeComponent();
             WM_MENSAJEREC = Funciones.RegisterWindowMessage("WM_MENSAJEREC");
             WM_MENSAJEENV = Funciones.RegisterWindowMessage("WM_MENSAJEENV");
-            npcs = new NamedPipeClientStream(".", "AuricularCliente", PipeDirection.InOut);
+            
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            Process p = new Process();
-            p.StartInfo.FileName = "..\\..\\..\\AuricularCli\\Bin\\Debug\\AuricularCli.exe";
-            p.Start();           
+            Process pac = new Process();
+            pac.StartInfo.FileName = "..\\..\\..\\AuricularCli\\Bin\\Debug\\AuricularCli.exe";
+            pac.Start();
+            
+            npcs = new NamedPipeClientStream(".", "AuricularCliente", PipeDirection.InOut);
             npcs.Connect();
             sr = new StreamReader(npcs);
-            //p = new Process();
-            //p.StartInfo.FileName = "..\\..\\..\\MicrofonoCli\\bin\\debug\\MicrofonoCli.exe";
-            //p.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -51,7 +50,7 @@ namespace FormularioCliente
             if (m.Msg == WM_MENSAJEREC)
             {
                 txtRecibido.Clear();
-                string mensaje = sr.ReadLine();
+                String mensaje = sr.ReadLine();
                 txtRecibido.Text = mensaje;
             }
             else

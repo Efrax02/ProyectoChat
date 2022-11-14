@@ -1,0 +1,15 @@
+/*Servidor*/
+
+//NamedPipeClientStream npcs = new NamedPipeClientStream(".","MicrofonoServidor", PipeDirection.In);
+            //npcs.Connect();
+            //StreamReader sr = new StreamReader(npcs);
+
+            
+            //mensaje=sr.ReadLine();
+
+
+/*Formulario*/
+
+//Process pmc = new Process();
+            //pmc.StartInfo.FileName = "..\\..\\..\\MicrofonoCli\\bin\\debug\\MicrofonoCli.exe";
+            //pmc.Start();
