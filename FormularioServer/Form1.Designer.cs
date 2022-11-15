@@ -30,75 +30,57 @@
         {
             this.btnConectarServ = new System.Windows.Forms.Button();
             this.btnEnviarServ = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.txtEnviarServ = new System.Windows.Forms.TextBox();
-            this.txtRecibidoServ = new System.Windows.Forms.TextBox();
+            this.lstMensajesServ = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // btnConectarServ
             // 
-            this.btnConectarServ.Location = new System.Drawing.Point(174, 190);
+            this.btnConectarServ.Location = new System.Drawing.Point(492, 282);
             this.btnConectarServ.Name = "btnConectarServ";
             this.btnConectarServ.Size = new System.Drawing.Size(75, 23);
             this.btnConectarServ.TabIndex = 7;
+            this.btnConectarServ.TabStop = false;
             this.btnConectarServ.Text = "Conectar";
             this.btnConectarServ.UseVisualStyleBackColor = true;
             this.btnConectarServ.Click += new System.EventHandler(this.btnConectar_Click);
             // 
             // btnEnviarServ
             // 
-            this.btnEnviarServ.Location = new System.Drawing.Point(61, 190);
+            this.btnEnviarServ.Location = new System.Drawing.Point(13, 282);
             this.btnEnviarServ.Name = "btnEnviarServ";
             this.btnEnviarServ.Size = new System.Drawing.Size(75, 23);
-            this.btnEnviarServ.TabIndex = 8;
+            this.btnEnviarServ.TabIndex = 1;
             this.btnEnviarServ.Text = "Enviar";
             this.btnEnviarServ.UseVisualStyleBackColor = true;
             this.btnEnviarServ.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(58, 127);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Enviar";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(61, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Recibido";
-            // 
             // txtEnviarServ
             // 
-            this.txtEnviarServ.Location = new System.Drawing.Point(61, 143);
+            this.txtEnviarServ.Location = new System.Drawing.Point(13, 256);
             this.txtEnviarServ.Name = "txtEnviarServ";
-            this.txtEnviarServ.Size = new System.Drawing.Size(270, 20);
-            this.txtEnviarServ.TabIndex = 3;
+            this.txtEnviarServ.Size = new System.Drawing.Size(554, 20);
+            this.txtEnviarServ.TabIndex = 0;
             // 
-            // txtRecibidoServ
+            // lstMensajesServ
             // 
-            this.txtRecibidoServ.Location = new System.Drawing.Point(61, 66);
-            this.txtRecibidoServ.Name = "txtRecibidoServ";
-            this.txtRecibidoServ.Size = new System.Drawing.Size(270, 20);
-            this.txtRecibidoServ.TabIndex = 4;
+            this.lstMensajesServ.HideSelection = false;
+            this.lstMensajesServ.Location = new System.Drawing.Point(13, 13);
+            this.lstMensajesServ.Name = "lstMensajesServ";
+            this.lstMensajesServ.Size = new System.Drawing.Size(554, 237);
+            this.lstMensajesServ.TabIndex = 9;
+            this.lstMensajesServ.TabStop = false;
+            this.lstMensajesServ.UseCompatibleStateImageBehavior = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 241);
+            this.ClientSize = new System.Drawing.Size(579, 311);
+            this.Controls.Add(this.lstMensajesServ);
             this.Controls.Add(this.btnConectarServ);
             this.Controls.Add(this.btnEnviarServ);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txtEnviarServ);
-            this.Controls.Add(this.txtRecibidoServ);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -111,10 +93,8 @@
 
         private System.Windows.Forms.Button btnConectarServ;
         private System.Windows.Forms.Button btnEnviarServ;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtEnviarServ;
-        private System.Windows.Forms.TextBox txtRecibidoServ;
+        private System.Windows.Forms.ListView lstMensajesServ;
     }
 }
 

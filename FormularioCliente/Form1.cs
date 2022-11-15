@@ -11,14 +11,15 @@ using FuncionesAPI;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
+using System.Security.AccessControl;
 
 namespace FormularioCliente
 {
     public partial class Form1 : Form
     {
-        int WM_MENSAJEREC,WM_MENSAJEENV;
+        int WM_MENSAJEREC;
         NamedPipeClientStream npcsa;
-        NamedPipeClientStream npcsm;
+        NamedPipeServerStream npssm;
         StreamReader sr;
         StreamWriter sw;
 
@@ -38,33 +39,30 @@ namespace FormularioCliente
             Process pmc = new Process();
             pmc.StartInfo.FileName = "..\\..\\..\\MicrofonoCli\\Bin\\Debug\\MicrofonoCli.exe";
             pmc.Start();
-
-            npcsa = new NamedPipeClientStream(".", "AuricularCliente", PipeDirection.InOut);
+                     
+            npcsa = new NamedPipeClientStream(".", "AuricularCliente", PipeDirection.In);
             npcsa.Connect();
             sr = new StreamReader(npcsa);
 
-            npcsm = new NamedPipeClientStream(".", "MicrofonoCliente", PipeDirection.InOut);
-            npcsm.Connect();
-            sw = new StreamWriter(npcsm);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            txtRecibido.Enabled = false;
+            npssm = new NamedPipeServerStream("MicrofonoCliente", PipeDirection.Out);
+            npssm.WaitForConnection();
+            sw = new StreamWriter(npssm);
+            sw.AutoFlush = true;
         }
 
         private void btnEnviarServ_Click(object sender, EventArgs e)
         {
-            sw.WriteLine(txtEnviar.Text.ToString());
+            sw.WriteLine(txtEnviarCli.Text);
+            lstMensajesCli.Items.Add($"Cliente: {txtEnviarCli.Text}");
+            txtEnviarCli.Clear();
         }
         protected override void DefWndProc(ref Message m)
         {
             
             if (m.Msg == WM_MENSAJEREC)
-            {
-                txtRecibido.Clear();
+            {                
                 String mensaje = sr.ReadLine();
-                txtRecibido.Text = mensaje;
+                lstMensajesCli.Items.Add($"Servidor: {mensaje}");
             }
             else
             {

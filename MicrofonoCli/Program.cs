@@ -8,35 +8,35 @@ using System.IO.Pipes;
 using System.Diagnostics;
 using FuncionesAPI;
 using System.Net.Http;
+using System.Security.AccessControl;
 
 namespace MicrofonoCli
 {
     internal class Program
     {
         static void Main(string[] args)
-        {
-            int WM_MENSAJEENV;
-            WM_MENSAJEENV = Funciones.RegisterWindowMessage("WM_MENSAJEENV");
+        {            
+            NamedPipeClientStream npcs = new NamedPipeClientStream(".","MicrofonoCliente", PipeDirection.In);
+            npcs.Connect();
+            StreamReader sr = new StreamReader(npcs);
 
-            NamedPipeServerStream npss = new NamedPipeServerStream("MicrofonoCliente",PipeDirection.InOut);
+            NamedPipeServerStream npss = new NamedPipeServerStream("MicrofonoCli", PipeDirection.Out);
             npss.WaitForConnection();
-            StreamReader sr = new StreamReader(npss);
             StreamWriter sw = new StreamWriter(npss);
-            sw.AutoFlush= true;
+            sw.AutoFlush = true;
 
             String mensaje = sr.ReadLine();
             Console.WriteLine(mensaje);
-            //sw.WriteLine(mensaje);
-            while(mensaje !=null)
+            sw.WriteLine(mensaje);
+            while (mensaje.CompareTo("EOF")!=0)
             {
                 mensaje = sr.ReadLine();
                 Console.WriteLine(mensaje);
-                //sw.WriteLine(mensaje);
+                sw.WriteLine(mensaje);
             }
+            npcs.Close();
+            sw.Close();
+            sr.Close();
         }
-        //protected override void DefWndProc(ref MessageProcessingHandler m)
-        //{
-
-        //}
     }
 }

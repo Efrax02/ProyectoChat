@@ -7,6 +7,7 @@ using System.IO;
 using System.IO.Pipes;
 using System.Diagnostics;
 using FuncionesAPI;
+using System.Security.AccessControl;
 
 namespace AuricularCli
 {
@@ -18,25 +19,32 @@ namespace AuricularCli
             int WH_MENSAJE;
             WH_MENSAJE = Funciones.RegisterWindowMessage("WM_MENSAJEREC");
             IntPtr h = Process.GetProcessesByName("FormularioCliente")[0].MainWindowHandle;
-            NamedPipeServerStream npss = new NamedPipeServerStream("AuricularCliente", PipeDirection.InOut);
-            npss.WaitForConnection();
-            StreamReader sr = new StreamReader(npss);
+
+            NamedPipeClientStream npcs = new NamedPipeClientStream(".", "AuricularServ", PipeDirection.In);
+            npcs.Connect();
+            StreamReader sr = new StreamReader(npcs);
+
+            NamedPipeServerStream npss = new NamedPipeServerStream("AuricularCliente", PipeDirection.Out);
+            npss.WaitForConnection();            
             StreamWriter sw = new StreamWriter(npss);
             sw.AutoFlush = true;
+            
             String mensaje;
-            mensaje = Console.ReadLine();
+            //mensaje = Console.ReadLine();
+            mensaje = sr.ReadLine();
             Funciones.PostMessage(h, WH_MENSAJE, IntPtr.Zero, IntPtr.Zero);
             sw.WriteLine(mensaje);
-            Console.Clear();
+            
             while (mensaje.CompareTo("EOF") != 0)
-            {
+            {                
+                //mensaje = Console.ReadLine(); 
+                mensaje = sr.ReadLine();
                 Funciones.PostMessage(h, WH_MENSAJE, IntPtr.Zero, IntPtr.Zero);
                 sw.WriteLine(mensaje);
-                //mensaje = sr.ReadLine();
-                mensaje = Console.ReadLine();
-                Console.Clear();
             }
+            
             sw.Close();
+            sr.Close();
             npss.WaitForPipeDrain();
             npss.Close();
         }

@@ -28,7 +28,7 @@ namespace FormularioServer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtRecibidoServ.Enabled = false;
+            //txtRecibidoServ.Enabled = false;
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)
@@ -45,13 +45,13 @@ namespace FormularioServer
             pms.StartInfo.FileName = "..\\..\\..\\MicrofonoServ\\Bin\\Debug\\MicrofonoServ.exe";
             pms.Start();
 
-            npssa = new NamedPipeServerStream(".","AuricularServidor",PipeDirection.Out);
-            npssa.WaitForConnection();
-            sr = new StreamReader(npssa);
+            //npssa = new NamedPipeServerStream(".","AuricularServidor",PipeDirection.Out);
+            //npssa.WaitForConnection();
+            //sr = new StreamReader(npssa);
 
-            npssm = new NamedPipeServerStream(".", "MicrofonoServidor", PipeDirection.Out);
-            npssm.Connect();
-            sw = new StreamWriter(npssm);
+            //npssm = new NamedPipeServerStream(".", "MicrofonoServidor", PipeDirection.Out);
+            //npssm.Connect();
+            //sw = new StreamWriter(npssm);
 
         }
         protected override void DefWndProc(ref Message m)
@@ -59,9 +59,9 @@ namespace FormularioServer
 
             if (m.Msg == WM_MENSAJEREC)
             {
-                txtRecibidoServ.Clear();
+                //txtRecibidoServ.Clear();
                 String mensaje = sr.ReadLine();
-                txtRecibidoServ.Text = mensaje;
+                //txtRecibidoServ.Text = mensaje;
             }
             else
             {

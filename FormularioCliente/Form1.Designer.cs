@@ -28,93 +28,94 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtRecibido = new System.Windows.Forms.TextBox();
-            this.txtEnviar = new System.Windows.Forms.TextBox();
+            this.txtEnviarCli = new System.Windows.Forms.TextBox();
+            this.btnEnviarCli = new System.Windows.Forms.Button();
+            this.btnConectarCli = new System.Windows.Forms.Button();
+            this.lstMensajesCli = new System.Windows.Forms.ListView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnEnviar = new System.Windows.Forms.Button();
-            this.btnConectar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // txtRecibido
+            // txtEnviarCli
             // 
-            this.txtRecibido.Location = new System.Drawing.Point(29, 52);
-            this.txtRecibido.Name = "txtRecibido";
-            this.txtRecibido.Size = new System.Drawing.Size(270, 20);
-            this.txtRecibido.TabIndex = 0;
+            this.txtEnviarCli.Location = new System.Drawing.Point(12, 257);
+            this.txtEnviarCli.Name = "txtEnviarCli";
+            this.txtEnviarCli.Size = new System.Drawing.Size(511, 20);
+            this.txtEnviarCli.TabIndex = 0;
             // 
-            // txtEnviar
+            // btnEnviarCli
             // 
-            this.txtEnviar.Location = new System.Drawing.Point(29, 129);
-            this.txtEnviar.Name = "txtEnviar";
-            this.txtEnviar.Size = new System.Drawing.Size(270, 20);
-            this.txtEnviar.TabIndex = 0;
+            this.btnEnviarCli.Location = new System.Drawing.Point(12, 283);
+            this.btnEnviarCli.Name = "btnEnviarCli";
+            this.btnEnviarCli.Size = new System.Drawing.Size(75, 23);
+            this.btnEnviarCli.TabIndex = 1;
+            this.btnEnviarCli.Text = "Enviar";
+            this.btnEnviarCli.UseVisualStyleBackColor = true;
+            this.btnEnviarCli.Click += new System.EventHandler(this.btnEnviarServ_Click);
+            // 
+            // btnConectarCli
+            // 
+            this.btnConectarCli.Location = new System.Drawing.Point(448, 283);
+            this.btnConectarCli.Name = "btnConectarCli";
+            this.btnConectarCli.Size = new System.Drawing.Size(75, 23);
+            this.btnConectarCli.TabIndex = 2;
+            this.btnConectarCli.TabStop = false;
+            this.btnConectarCli.Text = "Conectar";
+            this.btnConectarCli.UseVisualStyleBackColor = true;
+            this.btnConectarCli.Click += new System.EventHandler(this.btnConectarServ_Click);
+            // 
+            // lstMensajesCli
+            // 
+            this.lstMensajesCli.HideSelection = false;
+            this.lstMensajesCli.Location = new System.Drawing.Point(12, 12);
+            this.lstMensajesCli.Name = "lstMensajesCli";
+            this.lstMensajesCli.Size = new System.Drawing.Size(511, 239);
+            this.lstMensajesCli.TabIndex = 3;
+            this.lstMensajesCli.TabStop = false;
+            this.lstMensajesCli.UseCompatibleStateImageBehavior = false;
+            this.lstMensajesCli.View = System.Windows.Forms.View.List;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(258, 283);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(184, 20);
+            this.textBox1.TabIndex = 4;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 33);
+            this.label1.Location = new System.Drawing.Point(236, 288);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Recibido";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 113);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Enviar";
-            // 
-            // btnEnviar
-            // 
-            this.btnEnviar.Location = new System.Drawing.Point(29, 176);
-            this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(75, 23);
-            this.btnEnviar.TabIndex = 2;
-            this.btnEnviar.Text = "Enviar";
-            this.btnEnviar.UseVisualStyleBackColor = true;
-            this.btnEnviar.Click += new System.EventHandler(this.btnEnviarServ_Click);
-            // 
-            // btnConectar
-            // 
-            this.btnConectar.Location = new System.Drawing.Point(142, 176);
-            this.btnConectar.Name = "btnConectar";
-            this.btnConectar.Size = new System.Drawing.Size(75, 23);
-            this.btnConectar.TabIndex = 2;
-            this.btnConectar.Text = "Conectar";
-            this.btnConectar.UseVisualStyleBackColor = true;
-            this.btnConectar.Click += new System.EventHandler(this.btnConectarServ_Click);
+            this.label1.Size = new System.Drawing.Size(16, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Ip";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 226);
-            this.Controls.Add(this.btnConectar);
-            this.Controls.Add(this.btnEnviar);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(547, 318);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtEnviar);
-            this.Controls.Add(this.txtRecibido);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.lstMensajesCli);
+            this.Controls.Add(this.btnConectarCli);
+            this.Controls.Add(this.btnEnviarCli);
+            this.Controls.Add(this.txtEnviarCli);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox txtRecibido;
-        private System.Windows.Forms.TextBox txtEnviar;
+        private System.Windows.Forms.TextBox txtEnviarCli;
+        private System.Windows.Forms.Button btnEnviarCli;
+        private System.Windows.Forms.Button btnConectarCli;
+        private System.Windows.Forms.ListView lstMensajesCli;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnEnviar;
-        private System.Windows.Forms.Button btnConectar;
     }
 }
 
