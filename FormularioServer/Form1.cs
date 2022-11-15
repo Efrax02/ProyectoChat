@@ -45,6 +45,9 @@ namespace FormularioServer
             pms.StartInfo.FileName = "..\\..\\..\\MicrofonoServ\\Bin\\Debug\\MicrofonoServ.exe";
             pms.Start();
 
+
+            /********LOS HE DEJADO COMENTADOS PARA QUE NO ME DIERAN ERROR AL QUERER EJECUTAR*********/
+            
             //npssa = new NamedPipeServerStream(".","AuricularServidor",PipeDirection.Out);
             //npssa.WaitForConnection();
             //sr = new StreamReader(npssa);
