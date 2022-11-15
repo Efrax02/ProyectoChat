@@ -76,7 +76,7 @@
             this.btnEnviar.TabIndex = 2;
             this.btnEnviar.Text = "Enviar";
             this.btnEnviar.UseVisualStyleBackColor = true;
-            this.btnEnviar.Click += new System.EventHandler(this.btnEnviar_Click);
+            this.btnEnviar.Click += new System.EventHandler(this.btnEnviarServ_Click);
             // 
             // btnConectar
             // 
@@ -86,7 +86,7 @@
             this.btnConectar.TabIndex = 2;
             this.btnConectar.Text = "Conectar";
             this.btnConectar.UseVisualStyleBackColor = true;
-            this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
+            this.btnConectar.Click += new System.EventHandler(this.btnConectarServ_Click);
             // 
             // Form1
             // 
