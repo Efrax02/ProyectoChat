@@ -19,7 +19,7 @@ namespace FormularioCliente
     {
         int WM_MENSAJEREC;
         NamedPipeClientStream npcsa;
-        NamedPipeServerStream npssm;
+        NamedPipeClientStream npcsm;
         StreamReader sr;
         StreamWriter sw;
 
@@ -44,9 +44,9 @@ namespace FormularioCliente
             npcsa.Connect();
             sr = new StreamReader(npcsa);
 
-            npssm = new NamedPipeServerStream("MicrofonoCliente", PipeDirection.Out);
-            npssm.WaitForConnection();
-            sw = new StreamWriter(npssm);
+            npcsm = new NamedPipeClientStream(".","MicrofonoCliente", PipeDirection.Out);
+            npcsm.Connect();
+            sw = new StreamWriter(npcsm);
             sw.AutoFlush = true;
         }
 
@@ -74,7 +74,7 @@ namespace FormularioCliente
             sw.Close();
             sr.Close();
             npcsa.Close();
-            npssm.Close();            
+            npcsm.Close();            
         }
     }
 }

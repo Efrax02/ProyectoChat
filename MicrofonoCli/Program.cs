@@ -15,28 +15,31 @@ namespace MicrofonoCli
     internal class Program
     {
         static void Main(string[] args)
-        {            
-            NamedPipeClientStream npcs = new NamedPipeClientStream(".","MicrofonoCliente", PipeDirection.In);
+        {
+            NamedPipeClientStream npcs = new NamedPipeClientStream(".", "AuricularServ", PipeDirection.Out);
             npcs.Connect();
-            StreamReader sr = new StreamReader(npcs);
-
-            NamedPipeServerStream npss = new NamedPipeServerStream("MicrofonoCli", PipeDirection.Out);
-            npss.WaitForConnection();
-            StreamWriter sw = new StreamWriter(npss);
+            StreamWriter sw = new StreamWriter(npcs);
             sw.AutoFlush = true;
 
+            NamedPipeServerStream npss = new NamedPipeServerStream("MicrofonoCliente", PipeDirection.In);
+            npss.WaitForConnection();
+            StreamReader sr = new StreamReader(npss);
+            
+
             String mensaje = sr.ReadLine();
-            Console.WriteLine(mensaje);
+            //Console.WriteLine(mensaje);
             sw.WriteLine(mensaje);
             while (mensaje.CompareTo("EOF")!=0)
             {
                 mensaje = sr.ReadLine();
-                Console.WriteLine(mensaje);
+                //Console.WriteLine(mensaje);
                 sw.WriteLine(mensaje);
             }
+            npss.Close();
             npcs.Close();
             sw.Close();
             sr.Close();
+            
         }
     }
 }
