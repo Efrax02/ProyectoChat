@@ -69,5 +69,12 @@ namespace FormularioCliente
                 base.DefWndProc(ref m);
             }
         }
+        private void btnDesconectar_Click(object sender, EventArgs e)
+        {
+            sw.Close();
+            sr.Close();
+            npcsa.Close();
+            npssm.Close();            
+        }
     }
 }
