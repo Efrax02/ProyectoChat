@@ -16,8 +16,10 @@ namespace FormularioServer
     public partial class Form1 : Form
     {
         int WM_MENSAJEREC, WM_MENSAJEENV;
-        NamedPipeServerStream npss;
+        NamedPipeServerStream npssa;
+        NamedPipeClientStream npssm;
         StreamReader sr;
+        StreamWriter sw;
 
         public Form1()
         {
@@ -26,21 +28,45 @@ namespace FormularioServer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtRecibido.Enabled = false;
+            txtRecibidoServ.Enabled = false;
+        }
+
+        private void btnEnviar_Click(object sender, EventArgs e)
+        {
+            sw.WriteLine(txtEnviarServ.Text.ToString());
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            Process pac = new Process();
-            pac.StartInfo.FileName = "..\\..\\..\\AuricularServ\\Bin\\Debug\\AuricularServ.exe";
-            pac.Start();
-            pac = new Process();
-            pac.StartInfo.FileName = "..\\..\\..\\AuricularCli\\Bin\\Debug\\AuricularCli.exe";
+            Process pas = new Process();
+            pas.StartInfo.FileName = "..\\..\\..\\AuricularServ\\Bin\\Debug\\AuricularServ.exe";
+            pas.Start();
+            Process pms= new Process();
+            pms.StartInfo.FileName = "..\\..\\..\\MicrofonoServ\\Bin\\Debug\\MicrofonoServ.exe";
+            pms.Start();
 
-            npss = new NamedPipeServerStream();
-            npss.WaitForConnection();
-            sr = new StreamReader(npss);
+            npssa = new NamedPipeServerStream(".","AuricularServidor",PipeDirection.Out);
+            npssa.WaitForConnection();
+            sr = new StreamReader(npssa);
 
+            npssm = new NamedPipeServerStream(".", "MicrofonoServidor", PipeDirection.Out);
+            npssm.Connect();
+            sw = new StreamWriter(npssm);
+
+        }
+        protected override void DefWndProc(ref Message m)
+        {
+
+            if (m.Msg == WM_MENSAJEREC)
+            {
+                txtRecibidoServ.Clear();
+                String mensaje = sr.ReadLine();
+                txtRecibidoServ.Text = mensaje;
+            }
+            else
+            {
+                base.DefWndProc(ref m);
+            }
         }
     }
 }
