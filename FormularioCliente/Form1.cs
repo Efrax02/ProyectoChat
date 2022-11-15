@@ -29,7 +29,7 @@ namespace FormularioCliente
             
         }
 
-        private void btnConectar_Click(object sender, EventArgs e)
+        private void btnConectarServ_Click(object sender, EventArgs e)
         {
             Process pac = new Process();
             pac.StartInfo.FileName = "..\\..\\..\\AuricularCli\\Bin\\Debug\\AuricularCli.exe";
@@ -53,7 +53,7 @@ namespace FormularioCliente
             txtRecibido.Enabled = false;
         }
 
-        private void btnEnviar_Click(object sender, EventArgs e)
+        private void btnEnviarServ_Click(object sender, EventArgs e)
         {
             sw.WriteLine(txtEnviar.Text.ToString());
         }
