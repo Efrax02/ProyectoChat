@@ -48,7 +48,6 @@ namespace FormularioCliente
         {
 
         }
-
         protected override void DefWndProc(ref Message m)
         {
             
