@@ -28,32 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnConectar = new System.Windows.Forms.Button();
-            this.btnEnviar = new System.Windows.Forms.Button();
+            this.btnConectarServ = new System.Windows.Forms.Button();
+            this.btnEnviarServ = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtEnviar = new System.Windows.Forms.TextBox();
-            this.txtRecibido = new System.Windows.Forms.TextBox();
+            this.txtEnviarServ = new System.Windows.Forms.TextBox();
+            this.txtRecibidoServ = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // btnConectar
+            // btnConectarServ
             // 
-            this.btnConectar.Location = new System.Drawing.Point(174, 190);
-            this.btnConectar.Name = "btnConectar";
-            this.btnConectar.Size = new System.Drawing.Size(75, 23);
-            this.btnConectar.TabIndex = 7;
-            this.btnConectar.Text = "Conectar";
-            this.btnConectar.UseVisualStyleBackColor = true;
-            this.btnConectar.Click += new System.EventHandler(this.btnConectar_Click);
+            this.btnConectarServ.Location = new System.Drawing.Point(174, 190);
+            this.btnConectarServ.Name = "btnConectarServ";
+            this.btnConectarServ.Size = new System.Drawing.Size(75, 23);
+            this.btnConectarServ.TabIndex = 7;
+            this.btnConectarServ.Text = "Conectar";
+            this.btnConectarServ.UseVisualStyleBackColor = true;
+            this.btnConectarServ.Click += new System.EventHandler(this.btnConectar_Click);
             // 
-            // btnEnviar
+            // btnEnviarServ
             // 
-            this.btnEnviar.Location = new System.Drawing.Point(61, 190);
-            this.btnEnviar.Name = "btnEnviar";
-            this.btnEnviar.Size = new System.Drawing.Size(75, 23);
-            this.btnEnviar.TabIndex = 8;
-            this.btnEnviar.Text = "Enviar";
-            this.btnEnviar.UseVisualStyleBackColor = true;
+            this.btnEnviarServ.Location = new System.Drawing.Point(61, 190);
+            this.btnEnviarServ.Name = "btnEnviarServ";
+            this.btnEnviarServ.Size = new System.Drawing.Size(75, 23);
+            this.btnEnviarServ.TabIndex = 8;
+            this.btnEnviarServ.Text = "Enviar";
+            this.btnEnviarServ.UseVisualStyleBackColor = true;
+            this.btnEnviarServ.Click += new System.EventHandler(this.btnEnviar_Click);
             // 
             // label2
             // 
@@ -73,31 +74,31 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Recibido";
             // 
-            // txtEnviar
+            // txtEnviarServ
             // 
-            this.txtEnviar.Location = new System.Drawing.Point(61, 143);
-            this.txtEnviar.Name = "txtEnviar";
-            this.txtEnviar.Size = new System.Drawing.Size(270, 20);
-            this.txtEnviar.TabIndex = 3;
+            this.txtEnviarServ.Location = new System.Drawing.Point(61, 143);
+            this.txtEnviarServ.Name = "txtEnviarServ";
+            this.txtEnviarServ.Size = new System.Drawing.Size(270, 20);
+            this.txtEnviarServ.TabIndex = 3;
             // 
-            // txtRecibido
+            // txtRecibidoServ
             // 
-            this.txtRecibido.Location = new System.Drawing.Point(61, 66);
-            this.txtRecibido.Name = "txtRecibido";
-            this.txtRecibido.Size = new System.Drawing.Size(270, 20);
-            this.txtRecibido.TabIndex = 4;
+            this.txtRecibidoServ.Location = new System.Drawing.Point(61, 66);
+            this.txtRecibidoServ.Name = "txtRecibidoServ";
+            this.txtRecibidoServ.Size = new System.Drawing.Size(270, 20);
+            this.txtRecibidoServ.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(357, 241);
-            this.Controls.Add(this.btnConectar);
-            this.Controls.Add(this.btnEnviar);
+            this.Controls.Add(this.btnConectarServ);
+            this.Controls.Add(this.btnEnviarServ);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtEnviar);
-            this.Controls.Add(this.txtRecibido);
+            this.Controls.Add(this.txtEnviarServ);
+            this.Controls.Add(this.txtRecibidoServ);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -108,12 +109,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnConectar;
-        private System.Windows.Forms.Button btnEnviar;
+        private System.Windows.Forms.Button btnConectarServ;
+        private System.Windows.Forms.Button btnEnviarServ;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtEnviar;
-        private System.Windows.Forms.TextBox txtRecibido;
+        private System.Windows.Forms.TextBox txtEnviarServ;
+        private System.Windows.Forms.TextBox txtRecibidoServ;
     }
 }
 
