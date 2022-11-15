@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FuncionesAPI\FuncionesAPI.csproj">
+      <Project>{d57afc4e-34b1-454f-8dcb-97f66decb5e8}</Project>
+      <Name>FuncionesAPI</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

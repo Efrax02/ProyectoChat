@@ -17,14 +17,15 @@ namespace FormularioCliente
     public partial class Form1 : Form
     {
         int WM_MENSAJEREC,WM_MENSAJEENV;
-        NamedPipeClientStream npcs;
+        NamedPipeClientStream npcsa;
+        NamedPipeClientStream npcsm;
         StreamReader sr;
+        StreamWriter sw;
 
         public Form1()
         {
             InitializeComponent();
             WM_MENSAJEREC = Funciones.RegisterWindowMessage("WM_MENSAJEREC");
-            WM_MENSAJEENV = Funciones.RegisterWindowMessage("WM_MENSAJEENV");
             
         }
 
@@ -33,10 +34,18 @@ namespace FormularioCliente
             Process pac = new Process();
             pac.StartInfo.FileName = "..\\..\\..\\AuricularCli\\Bin\\Debug\\AuricularCli.exe";
             pac.Start();
-            
-            npcs = new NamedPipeClientStream(".", "AuricularCliente", PipeDirection.InOut);
-            npcs.Connect();
-            sr = new StreamReader(npcs);
+
+            Process pmc = new Process();
+            pmc.StartInfo.FileName = "..\\..\\..\\MicrofonoCli\\Bin\\Debug\\MicrofonoCli.exe";
+            pmc.Start();
+
+            npcsa = new NamedPipeClientStream(".", "AuricularCliente", PipeDirection.InOut);
+            npcsa.Connect();
+            sr = new StreamReader(npcsa);
+
+            npcsm = new NamedPipeClientStream(".", "MicrofonoCliente", PipeDirection.InOut);
+            npcsm.Connect();
+            sw = new StreamWriter(npcsm);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,7 +55,7 @@ namespace FormularioCliente
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {
-
+            sw.WriteLine(txtEnviar.Text.ToString());
         }
         protected override void DefWndProc(ref Message m)
         {
