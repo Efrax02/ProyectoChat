@@ -10,13 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FuncionesAPI;
 
 namespace FormularioServer
 {
     public partial class Form1 : Form
     {
-        int WM_MENSAJEREC, WM_MENSAJEENV;
-        NamedPipeServerStream npssa;
+        int WM_MENSAJEREC;
+        NamedPipeClientStream npssa;
         NamedPipeClientStream npssm;
         StreamReader sr;
         StreamWriter sw;
@@ -24,47 +25,53 @@ namespace FormularioServer
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //txtRecibidoServ.Enabled = false;
+            WM_MENSAJEREC = Funciones.RegisterWindowMessage("WM_MENSAJEREC");
         }
 
         private void btnEnviar_Click(object sender, EventArgs e)
         {
-            sw.WriteLine(txtEnviarServ.Text.ToString());
+            sw.WriteLine(txtEnviarServ.Text);
+            lstMensajesServ.Items.Add("YO: " + txtEnviarServ.Text);
+            txtEnviarServ.Text = "";
+            txtEnviarServ.Focus();
         }
 
         private void btnConectar_Click(object sender, EventArgs e)
         {
-            Process pas = new Process();
-            pas.StartInfo.FileName = "..\\..\\..\\AuricularServ\\Bin\\Debug\\AuricularServ.exe";
-            pas.Start();
-            Process pms= new Process();
-            pms.StartInfo.FileName = "..\\..\\..\\MicrofonoServ\\Bin\\Debug\\MicrofonoServ.exe";
-            pms.Start();
+            if (((Button)sender).Text == "Conectar")
+            {
+                /*Por qué haces eso?*/
+                lstMensajesServ.Enabled = true;
+                txtEnviarServ.Enabled = true;
+                btnEnviarServ.Enabled = true;
+                btnConectarServ.Text = "Desconectar";
 
 
-            /********LOS HE DEJADO COMENTADOS PARA QUE NO ME DIERAN ERROR AL QUERER EJECUTAR*********/
-            
-            //npssa = new NamedPipeServerStream(".","AuricularServidor",PipeDirection.Out);
-            //npssa.WaitForConnection();
-            //sr = new StreamReader(npssa);
+                Process pas = new Process();
+                pas.StartInfo.FileName = "..\\..\\..\\AuricularServ\\Bin\\Debug\\AuricularServ.exe";
+                pas.Start();
+                Process pms = new Process();
+                pms.StartInfo.FileName = "..\\..\\..\\MicrofonoServ\\Bin\\Debug\\MicrofonoServ.exe";
+                pms.Start();
 
-            //npssm = new NamedPipeServerStream(".", "MicrofonoServidor", PipeDirection.Out);
-            //npssm.Connect();
-            //sw = new StreamWriter(npssm);
 
+                npssm = new NamedPipeClientStream(".", "MicrofonoServidor", PipeDirection.Out);
+                npssm.Connect();
+                sw = new StreamWriter(npssm);
+                sw.AutoFlush = true;
+
+                npssa = new NamedPipeClientStream(".", "AuricularServidor", PipeDirection.In);
+                npssa.Connect();
+                sr = new StreamReader(npssa);
+                txtEnviarServ.Focus();
+            }
         }
         protected override void DefWndProc(ref Message m)
         {
 
             if (m.Msg == WM_MENSAJEREC)
             {
-                //txtRecibidoServ.Clear();
-                String mensaje = sr.ReadLine();
-                //txtRecibidoServ.Text = mensaje;
+                lstMensajesServ.Items.Add("Efrain: " + sr.ReadLine());
             }
             else
             {
