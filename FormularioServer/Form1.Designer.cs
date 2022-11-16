@@ -54,6 +54,7 @@
             this.btnConectarServ.TabStop = false;
             this.btnConectarServ.Text = "Conectar";
             this.btnConectarServ.UseVisualStyleBackColor = true;
+            this.btnConectarServ.Click += new System.EventHandler(this.btnConectar_Click);
             // 
             // btnEnviarServ
             // 

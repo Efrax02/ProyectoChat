@@ -16,14 +16,14 @@ namespace AuricularServ
         static void Main(string[] args)
         {
             String mensaje;
-            PipeSecurity ps = new PipeSecurity();
-            ps.AddAccessRule(new PipeAccessRule("Efrain", PipeAccessRights.ReadWrite, AccessControlType.Allow));
-            NamedPipeServerStream npssMicroServ = new NamedPipeServerStream("AuricularCliente", PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptions.None, 100, 100, ps);
+            //PipeSecurity ps = new PipeSecurity();
+            //ps.AddAccessRule(new PipeAccessRule("Efrain", PipeAccessRights.ReadWrite, AccessControlType.Allow));
+            NamedPipeServerStream npssMicroServ = new NamedPipeServerStream("AuricularServidor1", PipeDirection.In/*, 1, PipeTransmissionMode.Byte, PipeOptions.None, 100, 100, ps*/);
             npssMicroServ.WaitForConnection();
             StreamReader srMicro = new StreamReader(npssMicroServ);
 
 
-            NamedPipeServerStream npssForm = new NamedPipeServerStream("AuricularServidor", PipeDirection.Out);
+            NamedPipeServerStream npssForm = new NamedPipeServerStream("AuricularServidor2", PipeDirection.Out);
             npssForm.WaitForConnection();
             StreamWriter swForm = new StreamWriter(npssForm);
             swForm.AutoFlush = true;
@@ -35,12 +35,16 @@ namespace AuricularServ
             mensaje = srMicro.ReadLine();
             while (!mensaje.Equals("EOF"))
             {
-                //Console.WriteLine(mensaje);
                 Funciones.PostMessage(h, WH_MENSAJE, IntPtr.Zero, IntPtr.Zero);
                 swForm.WriteLine(mensaje);
-                mensaje = Console.ReadLine();
                 mensaje = srMicro.ReadLine();
             }
+            srMicro.Close();
+            swForm.Close();
+            npssForm.WaitForPipeDrain();
+            npssMicroServ.WaitForPipeDrain();
+            npssForm.Close();
+            npssMicroServ.Close();
         }
     }
 }

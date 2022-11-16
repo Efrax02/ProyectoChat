@@ -20,7 +20,7 @@ namespace AuricularCli
             WH_MENSAJE = Funciones.RegisterWindowMessage("WM_MENSAJEREC");
             IntPtr h = Process.GetProcessesByName("FormularioCliente")[0].MainWindowHandle;
 
-            NamedPipeClientStream npcs = new NamedPipeClientStream(".", "AuricularServ", PipeDirection.In);
+            NamedPipeClientStream npcs = new NamedPipeClientStream(".", "MicrofonoServidor2", PipeDirection.In);
             npcs.Connect();
             StreamReader sr = new StreamReader(npcs);
 
@@ -30,23 +30,21 @@ namespace AuricularCli
             sw.AutoFlush = true;
             
             String mensaje;
-            //mensaje = Console.ReadLine();
             mensaje = sr.ReadLine();
-            Funciones.PostMessage(h, WH_MENSAJE, IntPtr.Zero, IntPtr.Zero);
-            sw.WriteLine(mensaje);
-            
+                        
             while (mensaje.CompareTo("EOF") != 0)
-            {                
-                //mensaje = Console.ReadLine(); 
-                mensaje = sr.ReadLine();
+            {
                 Funciones.PostMessage(h, WH_MENSAJE, IntPtr.Zero, IntPtr.Zero);
                 sw.WriteLine(mensaje);
+                mensaje = sr.ReadLine();                
             }
             
             sw.Close();
             sr.Close();
             npss.WaitForPipeDrain();
+            npcs.WaitForPipeDrain();
             npss.Close();
+            npcs.Close();
         }
     }
 }

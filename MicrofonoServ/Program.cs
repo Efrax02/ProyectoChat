@@ -15,24 +15,27 @@ namespace MicrofonoServ
         {
             String mensaje;
 
-            NamedPipeServerStream npssForm = new NamedPipeServerStream("MicrofonoServidor", PipeDirection.In);
+            NamedPipeServerStream npssForm = new NamedPipeServerStream("MicrofonoServidor1", PipeDirection.In);
             npssForm.WaitForConnection();
             StreamReader srForm = new StreamReader(npssForm);
 
-            PipeSecurity ps = new PipeSecurity();
-            ps.AddAccessRule(new PipeAccessRule("Efrain", PipeAccessRights.ReadWrite, AccessControlType.Allow));
-            NamedPipeServerStream npssAuricCS = new NamedPipeServerStream("AuricularServidor", PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.None, 100, 100, ps);
+            //PipeSecurity ps = new PipeSecurity();
+            //ps.AddAccessRule(new PipeAccessRule("Efrain", PipeAccessRights.ReadWrite, AccessControlType.Allow));
+            NamedPipeServerStream npssAuricCS = new NamedPipeServerStream("MicrofonoServidor2", PipeDirection.Out/*, 1, PipeTransmissionMode.Byte, PipeOptions.None, 100, 100, ps*/);
             npssAuricCS.WaitForConnection();
             StreamWriter swAuric = new StreamWriter(npssAuricCS);
             swAuric.AutoFlush = true;
 
             mensaje = srForm.ReadLine();
             while (!mensaje.Equals("EOF"))
-            {
-                Console.WriteLine(mensaje);
+            {                
                 swAuric.WriteLine(mensaje);
                 mensaje = srForm.ReadLine();
             }
+            srForm.Close();
+            swAuric.Close();
+            npssForm.Close();
+            npssAuricCS.Close();
         }
     }
 }

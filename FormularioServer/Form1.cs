@@ -40,11 +40,9 @@ namespace FormularioServer
         {
             if (((Button)sender).Text == "Conectar")
             {
-                /*Por qué haces eso?*/
                 lstMensajesServ.Enabled = true;
                 txtEnviarServ.Enabled = true;
                 btnEnviarServ.Enabled = true;
-                btnConectarServ.Text = "Desconectar";
 
 
                 Process pas = new Process();
@@ -54,13 +52,12 @@ namespace FormularioServer
                 pms.StartInfo.FileName = "..\\..\\..\\MicrofonoServ\\Bin\\Debug\\MicrofonoServ.exe";
                 pms.Start();
 
-
-                npssm = new NamedPipeClientStream(".", "MicrofonoServidor", PipeDirection.Out);
+                npssm = new NamedPipeClientStream(".", "MicrofonoServidor1", PipeDirection.Out);
                 npssm.Connect();
                 sw = new StreamWriter(npssm);
                 sw.AutoFlush = true;
 
-                npssa = new NamedPipeClientStream(".", "AuricularServidor", PipeDirection.In);
+                npssa = new NamedPipeClientStream(".", "AuricularServidor2", PipeDirection.In);
                 npssa.Connect();
                 sr = new StreamReader(npssa);
                 txtEnviarServ.Focus();

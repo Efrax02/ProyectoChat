@@ -39,7 +39,7 @@ namespace FormularioCliente
             Process pmc = new Process();
             pmc.StartInfo.FileName = "..\\..\\..\\MicrofonoCli\\Bin\\Debug\\MicrofonoCli.exe";
             pmc.Start();
-                     
+                        
             npcsa = new NamedPipeClientStream(".", "AuricularCliente", PipeDirection.In);
             npcsa.Connect();
             sr = new StreamReader(npcsa);
@@ -53,8 +53,9 @@ namespace FormularioCliente
         private void btnEnviarServ_Click(object sender, EventArgs e)
         {
             sw.WriteLine(txtEnviarCli.Text);
-            lstMensajesCli.Items.Add($"Cliente: {txtEnviarCli.Text}");
+            lstMensajesCli.Items.Add($"YO: {txtEnviarCli.Text}");
             txtEnviarCli.Clear();
+            txtEnviarCli.Focus();
         }
         protected override void DefWndProc(ref Message m)
         {
@@ -62,7 +63,7 @@ namespace FormularioCliente
             if (m.Msg == WM_MENSAJEREC)
             {                
                 String mensaje = sr.ReadLine();
-                lstMensajesCli.Items.Add($"Servidor: {mensaje}");
+                lstMensajesCli.Items.Add($"Iñaki: {mensaje}");
             }
             else
             {

@@ -16,7 +16,7 @@ namespace MicrofonoCli
     {
         static void Main(string[] args)
         {
-            NamedPipeClientStream npcs = new NamedPipeClientStream(".", "AuricularServ", PipeDirection.Out);
+            NamedPipeClientStream npcs = new NamedPipeClientStream(".", "AuricularServidor1", PipeDirection.Out);
             npcs.Connect();
             StreamWriter sw = new StreamWriter(npcs);
             sw.AutoFlush = true;
@@ -27,19 +27,15 @@ namespace MicrofonoCli
             
 
             String mensaje = sr.ReadLine();
-            //Console.WriteLine(mensaje);
-            sw.WriteLine(mensaje);
             while (mensaje.CompareTo("EOF")!=0)
-            {
-                mensaje = sr.ReadLine();
-                //Console.WriteLine(mensaje);
+            {                
                 sw.WriteLine(mensaje);
+                mensaje = sr.ReadLine();
             }
             npss.Close();
             npcs.Close();
             sw.Close();
-            sr.Close();
-            
+            sr.Close();            
         }
     }
 }
